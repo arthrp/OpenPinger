@@ -35,7 +35,7 @@ namespace OpenPinger.Controllers
         }
 
         [HttpPost("addEndpoint")]
-        public IActionResult AddEndpoint(EndpointStatus statusModel)
+        public IActionResult AddEndpoint(EndpointInfo statusModel)
         {
             if(!IsValid(statusModel))
             {
@@ -44,7 +44,8 @@ namespace OpenPinger.Controllers
                 return View("Index", prevModel);
             }
 
-            var data = _provider.AddStatus(statusModel);
+            statusModel.PollIntervalMilliseconds = 3000;
+            var data = _provider.AddWatcher(statusModel);
             var model = new EndpointStatusesViewModel() { Statuses = data };
 
             return View("Index", model);
@@ -56,7 +57,7 @@ namespace OpenPinger.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private bool IsValid(EndpointStatus model)
+        private bool IsValid(EndpointInfo model)
         {
             return !string.IsNullOrWhiteSpace(model.Host);
         }

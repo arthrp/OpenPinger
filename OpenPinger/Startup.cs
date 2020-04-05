@@ -25,7 +25,8 @@ namespace OpenPinger
         {
             services.AddControllersWithViews();
 
-            services.AddSingleton<EndpointStatusProvider>(new EndpointStatusProvider());
+            services.AddSingleton<EndpointStatusProvider>();
+            services.AddSingleton<EndpointStatusDbSingleton>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

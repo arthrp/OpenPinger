@@ -14,7 +14,7 @@
             <ul class="list-group list-group-flush">
                 @foreach (var s in Model.Statuses)
                 {
-                    <li class="list-group-item">@s.Host - <span class="status status-ok">@s.Result.ToString()</span></li>
+                    <li class="list-group-item">@s.Host - <span class="status @s.Response.StatusCssClass">@s.Response.StatusText</span><span class="status-timestamp"> (@s.Response.LastChecked.ToString("o"))</span></li>
                 }
             </ul>
         </div>

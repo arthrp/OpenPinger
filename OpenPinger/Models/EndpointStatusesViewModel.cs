@@ -10,12 +10,4 @@ namespace OpenPinger.Models
     {
         public IEnumerable<EndpointStatus> Statuses { get; set; }
     }
-
-    //public class EndpointStatus
-    //{
-    //    public string Host { get; set; }
-    //    public EndpointCheckResult Result { get; set; }
-    //}
-
-
 }

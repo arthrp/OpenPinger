@@ -77,3 +77,8 @@ body {
 .status-fail {
     color: #FF0000;
 }
+
+.status-timestamp{
+    color:#CCC;
+    font-style: italic;
+}

@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace OpenPinger.Dtos
 {
-    public class EndpointStatus
+    public class EndpointStatus : EndpointInfo
     {
-        public string Host { get; set; }
-        public EndpointCheckResult Result { get; set; }
+        public EndpointResponse Response { get; set; }
     }
 
     public enum EndpointCheckResult
