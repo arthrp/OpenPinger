@@ -18,10 +18,6 @@ namespace OpenPinger
         {
             _serviceProvider = serviceProvider;
             _endpointStatusDb = (EndpointStatusDbSingleton)serviceProvider.GetService(typeof(EndpointStatusDbSingleton));
-            //_statuses = new List<EndpointStatus>()
-            //{
-            //    new EndpointStatus() { Host = "http://www.example.com", Result = EndpointCheckResult.OK }
-            //};
         }
 
         public IEnumerable<EndpointStatus> GetCurrentState()
@@ -42,18 +38,35 @@ namespace OpenPinger
             return s;
         }
 
+        public IEnumerable<EndpointStatus> RemoveWatcherAndGetData(string host)
+        {
+            RemoveWatcher(host);
+            var s = ReadStatuses();
+
+            return s;
+        }
+
+        public void RemoveWatcher(string host)
+        {
+            EndpointResponse res = null;
+            var targetWatcher = _watchers.FirstOrDefault(ss => ss.Info.Host == host);
+            targetWatcher.Terminate();
+
+            _watchers.Remove(targetWatcher);
+        }
+
         private IEnumerable<EndpointStatus> ReadStatuses()
         {
-            var statuses = new List<EndpointStatus>();
+            var statusesResult = new List<EndpointStatus>();
             var statusesSnapshot = _endpointStatusDb.Statuses.ToList();
 
             foreach (var dbStatus in statusesSnapshot)
             {
                 var endpointStatus = new EndpointStatus() { Host = dbStatus.Key, Response = dbStatus.Value };
-                statuses.Add(endpointStatus);
+                statusesResult.Add(endpointStatus);
             }
 
-            return statuses;
+            return statusesResult;
         }
     }
 }

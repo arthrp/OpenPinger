@@ -51,6 +51,15 @@ namespace OpenPinger.Controllers
             return View("Index", model);
         }
 
+        [HttpPost("deleteEndpoint")]
+        public IActionResult RemoveEndpoint(string hostName)
+        {
+            var data = _provider.RemoveWatcherAndGetData(hostName);
+            var model = new EndpointStatusesViewModel() { Statuses = data };
+
+            return View("Index", model);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -14,7 +14,14 @@
             <ul class="list-group list-group-flush">
                 @foreach (var s in Model.Statuses)
                 {
-                    <li class="list-group-item">@s.Host - <span class="status @s.Response.StatusCssClass">@s.Response.StatusText</span><span class="status-timestamp"> (@s.Response.LastChecked.ToString("o"))</span></li>
+                
+                <li class="list-group-item">
+                    <form action="/deleteEndpoint" method="post">
+                        <input type="hidden" name="hostName" value="@s.Host" />
+                        @s.Host - <span class="status @s.Response.StatusCssClass">@s.Response.StatusText</span><span class="status-timestamp"> (@s.Response.LastChecked.ToString("yyyy-MM-dd hh:mm:ss"))</span>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </li>
                 }
             </ul>
         </div>
