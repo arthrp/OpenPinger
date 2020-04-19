@@ -46,7 +46,6 @@ namespace OpenPinger.Controllers
 
             statusModel.PollIntervalMilliseconds = 3000;
             var data = _provider.AddWatcher(statusModel);
-            var model = new EndpointStatusesViewModel() { Statuses = data };
 
             return RedirectToAction("Index");
         }
@@ -54,8 +53,7 @@ namespace OpenPinger.Controllers
         [HttpPost("deleteEndpoint")]
         public IActionResult RemoveEndpoint(string hostName)
         {
-            var data = _provider.RemoveWatcherAndGetData(hostName);
-            var model = new EndpointStatusesViewModel() { Statuses = data };
+            _provider.RemoveWatcher(hostName);
 
             return RedirectToAction("Index");
         }
