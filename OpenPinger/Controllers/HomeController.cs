@@ -48,7 +48,7 @@ namespace OpenPinger.Controllers
             var data = _provider.AddWatcher(statusModel);
             var model = new EndpointStatusesViewModel() { Statuses = data };
 
-            return View("Index", model);
+            return RedirectToAction("Index");
         }
 
         [HttpPost("deleteEndpoint")]
@@ -57,7 +57,7 @@ namespace OpenPinger.Controllers
             var data = _provider.RemoveWatcherAndGetData(hostName);
             var model = new EndpointStatusesViewModel() { Statuses = data };
 
-            return View("Index", model);
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
