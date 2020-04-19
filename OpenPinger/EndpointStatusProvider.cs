@@ -32,7 +32,6 @@ namespace OpenPinger
             var client = new HttpClient();
             client.BaseAddress = new Uri(endpointInfo.Host);
             _watchers.Add(new EndpointWatcher(client, endpointInfo, _serviceProvider));
-            //_statuses.Add(new EndpointStatus() { Host = endpointInfo.Host, PollIntervalMilliseconds = endpointInfo.PollIntervalMilliseconds, Result = EndpointCheckResult.OK });
 
             var s = ReadStatuses();
             return s;
@@ -48,7 +47,6 @@ namespace OpenPinger
 
         public void RemoveWatcher(string host)
         {
-            EndpointResponse res = null;
             var targetWatcher = _watchers.FirstOrDefault(ss => ss.Info.Host == host);
             targetWatcher.Terminate();
 
