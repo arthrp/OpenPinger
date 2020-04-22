@@ -9,9 +9,4 @@ namespace OpenPinger.Dtos
     {
         public EndpointResponse Response { get; set; }
     }
-
-    public enum EndpointCheckResult
-    {
-        OK, Fail
-    }
 }

@@ -12,7 +12,6 @@ namespace OpenPinger
     {
         private readonly HttpClient _client;
         private readonly Timer _timer;
-        //private readonly IServiceProvider _serviceProvider;
         private readonly EndpointStatusDbSingleton _endpointStatusDb;
         public readonly EndpointInfo Info;
 
@@ -55,7 +54,7 @@ namespace OpenPinger
             }
             
 
-            Console.WriteLine($"Polling endpoint - result {r.StatusCode}");
+            Console.WriteLine($"Polling endpoint {Info.Host} - result {r.StatusCode}");
         }
     }
 }
